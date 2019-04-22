@@ -1,0 +1,7 @@
+#TODO:
+
+1. Implement main tokenizers from Elasticsearch
+2. Do some LAws of Text coding
+3. Tokenizer: add impl of REGEX? then use Inheritance in python?
+4. Benchmark NLTK vs myIMPL
+
