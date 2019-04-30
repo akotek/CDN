@@ -41,3 +41,35 @@ class TestTokenisation(unittest.TestCase):
 
         self.assertEqual(1, len(tokens))
         self.assertEqual(str1.lower(), tokens[0])
+
+    def test_edge_ngram_tokenizer_default_params(self):
+        str1 = "Quick Fox"
+
+        tokens = self.tokenizer.edge_ngram_tokenizer(str1)
+
+        self.assertEqual(2, len(tokens))
+        self.assertListEqual(['Q', 'Qu'], tokens)
+
+    def test_edge_ngram_tokenizer_with_params(self):
+        str1 = "Quick2Brown$Fox"
+
+        # split on digit && symbol
+        tokens = self.tokenizer.edge_ngram_tokenizer(str1, min_gram=3, max_gram=7, tok_chars=["letter"])
+
+        self.assertEqual(7, len(tokens))
+        self.assertListEqual(['Qui', 'Quic', 'Quick', 'Bro', 'Brow', 'Brown', 'Fox'], tokens)
+
+    def test_edge_ngram_tokenizer_invalid(self):
+
+        self.assertRaises(AssertionError, self.tokenizer.edge_ngram_tokenizer, None)
+
+        # check empty strings:
+        str1 = ""
+
+        tokens = self.tokenizer.edge_ngram_tokenizer(str1)
+        self.assertEqual(0, len(tokens))
+
+        str2 = str1 + " "
+
+        tokens = self.tokenizer.edge_ngram_tokenizer(str2, min_gram=2, max_gram=2)
+        self.assertEqual(0, len(tokens))
