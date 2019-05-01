@@ -1,7 +1,18 @@
 #TODO:
 
+
 1. Implement main tokenizers from Elasticsearch
-2. Do some LAws of Text coding
-3. Tokenizer: add impl of REGEX? then use Inheritance in python?
-4. Benchmark NLTK vs myIMPL
+2. Stemmer (porter) impl
+3. Implement stopwords removal
+4. PreProcess huge file and check it out
+
+
+
+
+
+
+#TODO LAST:
+- CI/CD internally for running tests after each commit
+- Benchmark NLTK vs myIMPL
+- Do some LAws of Text coding
 
