@@ -1,7 +1,6 @@
 #TODO:
 
-
-1. Implement main tokenizers from Elasticsearch
+1. impl nGRAM tok
 2. Stemmer (porter) impl
 3. Implement stopwords removal
 4. PreProcess huge file and check it out
