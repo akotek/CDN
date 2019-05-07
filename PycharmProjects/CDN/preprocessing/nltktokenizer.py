@@ -15,5 +15,3 @@ class NLTKTokenizer:
         stemmer = PorterStemmer()
         tokens = self.tokenize_punct_nltk(words)
         return [stemmer.stem(tkn) for tkn in tokens]
-
-    ngrams()
