@@ -1,2 +1,2 @@
-Trying to implement my own search-engine, using Stanfords NLP IR-book (https://nlp.stanford.edu/IR-book/),
+Trying to implement my own search-engine, using USMass IR-book (https://ciir.cs.umass.edu/irbook/),
 following IR principles of indexing and boolean search.
