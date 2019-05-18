@@ -122,7 +122,7 @@ class TestTokenize(unittest.TestCase):
     def test_tokenization_on_file(self):
 
         tokenizer = StandardTokenizer()
-        fp = os.path.join(os.path.dirname(__file__), "files\\tokenization\\")
+        fp = os.path.join(os.path.dirname(__file__), "files\\tokenize\\")
 
         with open(fp + "before", 'r') as f, open(fp + "after", 'w') as w:
             for line in f:
