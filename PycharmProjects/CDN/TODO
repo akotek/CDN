@@ -1,9 +1,19 @@
 #TODO:
 
-0. Impl inverted index data structure
+# INDEXER:
+
+1. impl pos inverted with FREQ index
+
+# TOKENIZATION
+0. fix standard tokenization .2 and a- etc cases
 1. impl nGRAM tok
 2. Stemmer (porter) impl
-4. PreProcess huge file and check it out
+4. Check all tokenizers behaviours \\ API
+
+
+# SCORING
+........
+1.
 
 
 
@@ -15,3 +25,5 @@ Documents data >> modified tokens >> indexer builds the inverted index
 - Benchmark NLTK vs myIMPL
 - Do some LAws of Text coding
 
+#TESTS
+- add tests documentation

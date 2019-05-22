@@ -82,7 +82,7 @@ class TestTokenize(unittest.TestCase):
         str1 = "Email me at john.smith@global-international.com"
         tokens = tokenizer.tokenize(str1)
         self.assertEqual(4, len(tokens))
-        self.assertListEqual(['Email', 'me', 'at', 'john.smith@global-international.com'], tokens)
+        self.assertListEqual(['email', 'me', 'at', 'john.smith@global-international.com'], tokens)
 
     def test_uax_url_email_tokenizer_invalid(self):
 
@@ -106,7 +106,7 @@ class TestTokenize(unittest.TestCase):
 
         tokenizer = StopwordsTokenizer()
         str1 = "im awake or asleep a"
-        path = os.path.join(os.path.dirname(__file__), "files\stops.txt")
+        path = os.path.join(os.path.dirname(__file__), "files\\tokenize\stops.txt")
         tokens = tokenizer.tokenize(str1, sw_file=path, stops=None, rmv_trail=False)
         self.assertEqual(4, len(tokens))
         self.assertListEqual(['awake', 'or', 'asleep', 'a'], tokens)
@@ -123,18 +123,15 @@ class TestTokenize(unittest.TestCase):
 
         tokenizer = StandardTokenizer()
         fp = os.path.join(os.path.dirname(__file__), "files\\tokenize\\")
-
         with open(fp + "before", 'r') as f, open(fp + "after", 'w') as w:
             for line in f:
                 for tok in tokenizer.tokenize(line):
                     w.write(tok + "\n")
-
         self.assertTrue(filecmp.cmp(fp + "es_output", fp + "after"))
 
     def test_invalidity(self):
-        # tests simple invalid inputs for all existing tokenizers
-        tokenizers = [StandardTokenizer(), NGramTokenizer(), UAXEmailTokenizer()]
 
+        tokenizers = [StandardTokenizer(), NGramTokenizer(), UAXEmailTokenizer()]
         str1 = ""
         for tokenizer in tokenizers:
             tokens = tokenizer.tokenize(str1)

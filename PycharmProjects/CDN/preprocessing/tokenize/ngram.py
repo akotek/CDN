@@ -4,7 +4,12 @@ import re
 
 class NGramTokenizer(Tokenizer):
 
-    def tokenize(self, s: str, min_gram: int = 1, max_gram: int = 2, tok_chars: list = [], edges=False) -> list:
+    # ------------------
+    # ANALYZERS:
+    LEGAL_TOKEN_CHARS = ["letter", "digit", "whitespace", "punctuation", "symbol"]
+    # ------------------
+
+    def tokenize(self, s: str, min_gram: int = 1, max_gram: int = 2, tok_chars: list=None, edges=False) -> list:
         # The ngram tokenizer first breaks text down into words whenever it encounters words from token-chars,
         # then it emits N-grams of each word of the specified length.
         # N-grams are like a sliding window that moves across the word -
@@ -17,14 +22,17 @@ class NGramTokenizer(Tokenizer):
         # "Quick Fox"
         # >> [ Q, Qu, u, ui, i, ic, c, ck, k, "k ", " ", " F", F, Fo, o, ox, x ]
 
+        if tok_chars is None:
+            tok_chars = []
+
         self._assert_grams(min_gram, max_gram, tok_chars)
 
         if edges:
-            return self._edge_ngram_tokenizer(s, min_gram, max_gram, tok_chars)
+            return self._edge_ngram(s, min_gram, max_gram, tok_chars)
 
         return []           # TODO impl this
 
-    def _edge_ngram_tokenizer(self, s: str, min_gram: int = 1, max_gram: int = 2, tok_chars: list = []) -> list:
+    def _edge_ngram(self, s: str, min_gram: int = 1, max_gram: int = 2, tok_chars: list=None) -> list:
 
         # The edge_ngram tokenizer first breaks text down into words whenever it encounters words from token-chars,
         # then it emits N-grams of each word where the start of the N-gram is anchored to the beginning of the word.
@@ -38,8 +46,6 @@ class NGramTokenizer(Tokenizer):
 
         # "Quick2Fox" with token_chars == ["letter"], will split on "2" (~token_chars)
         # >> [Q, Qu, F, Fo]
-
-        self._assert_grams(min_gram, max_gram, tok_chars)
 
         split_regex = self._gen_reg_from_token_chars(tok_chars)
         splitted = re.split(split_regex, s) if split_regex else [s]
