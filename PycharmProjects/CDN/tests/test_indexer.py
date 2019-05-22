@@ -5,7 +5,7 @@ from preprocessing.tokenize.stand import StandardTokenizer
 
 class TestIndexer(unittest.TestCase):
 
-    def test_freq_indexing(self):
+    def test_simple_indexer(self):
 
         indexer = Indexer(tokenizer=StandardTokenizer())
         fp = os.path.join(os.path.dirname(__file__), "files\indexer\\")
@@ -14,5 +14,3 @@ class TestIndexer(unittest.TestCase):
             for term, posts in sorted(index.items()):
                 w.write("{}: {}\n".format(term, ",".join(map(str, posts))))
         self.assertTrue(filecmp.cmp(fp + "simple\\expected", fp + "simple\\result"))
-
-

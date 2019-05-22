@@ -2,7 +2,8 @@
 
 # INDEXER:
 
-1. impl pos inverted with FREQ index
+1. Compression
+2. Memory with writing to disk...
 
 # TOKENIZATION
 0. fix standard tokenization .2 and a- etc cases

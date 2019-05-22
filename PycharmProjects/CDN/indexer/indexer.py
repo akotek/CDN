@@ -6,7 +6,7 @@ from preprocessing.tokenize.tokenizer import Tokenizer
 
 class Indexer:
 
-    # Implementation of a simple indexer,
+    # Implementation of a simple in-memory indexer's,
     # based on algorithms presented in SEIRiP book
 
     def __init__(self, tokenizer: Tokenizer):
