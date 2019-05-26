@@ -2,27 +2,43 @@
 
 # INDEXER:
 
-1. Compression
+2. Positional index
 2. Memory with writing to disk...
+3. Compression?
 
 # TOKENIZATION
+0. Define again behaviours and stuff
 0. fix standard tokenization .2 and a- etc cases
 1. impl nGRAM tok
-2. Stemmer (porter) impl
-4. Check all tokenizers behaviours \\ API
 
 
-# SCORING
+# SEARCH / SCORING
 ........
-1.
+1. Build a module that allows the following:
+- load index into memory
+- apply Boolean search (AND, OR, and NOT)
+- apply phrase search
+- apply proximity search
+2. Run queries and check results
+3. tf/idf weightning
 
 
+# THEORY:
+.......
+1. Elasticsearch theory behind relevance scoring
+https://www.elastic.co/guide/en/elasticsearch/guide/current/scoring-theory.html
+2.
 
+
+# WRITE ON:
+........
+1. Inverted index
+2. Retrieval models
 Documents data >> modified tokens >> indexer builds the inverted index
 
 
 #TODO LAST:
-- CI/CD internally for running tests after each commit
+- CI/CD internally for running tests/build after each commit
 - Benchmark NLTK vs myIMPL
 - Do some LAws of Text coding
 

@@ -1,16 +1,21 @@
 import unittest, os, filecmp
-from indexer.indexer import *
+from os.path import join, dirname
+
+from indexer.index import Index
 from preprocessing.tokenize.stand import StandardTokenizer
 
 
 class TestIndexer(unittest.TestCase):
 
-    def test_simple_indexer(self):
+    def test_freq_indexing(self):
 
-        indexer = Indexer(tokenizer=StandardTokenizer())
-        fp = os.path.join(os.path.dirname(__file__), "files\indexer\\")
-        index = indexer.build_simple_index(fp + "docs")
-        with open(fp + "simple\\result", 'w') as w:
-            for term, posts in sorted(index.items()):
-                w.write("{}: {}\n".format(term, ",".join(map(str, posts))))
-        self.assertTrue(filecmp.cmp(fp + "simple\\expected", fp + "simple\\result"))
+        indexer = Index(tokenizer=StandardTokenizer())
+        fp = join(dirname(__file__), "files\indexer\\")
+        index = indexer.build(fp + "docs")
+        with open(fp + "freq\\result", 'w') as w:
+            for term, pst_list in sorted(index.items()):
+                w.write("{}:\n".format(term))
+                for pst in pst_list:
+                    w.write("{}\n".format(pst))
+                w.write("\n")
+        self.assertTrue(filecmp.cmp(fp + "freq\\expected", fp + "freq\\result"))
