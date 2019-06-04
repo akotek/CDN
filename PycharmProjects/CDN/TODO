@@ -1,13 +1,18 @@
 #TODO:
 
-# INDEXER:
+#TODO DO SPECS BEFORE EACH IMPL!!
 
-2. Positional index
+# INDEXER:
+..........
+2. Test on trec file (edit it)
 2. Memory with writing to disk...
 3. Compression?
+4. LATER: improve to tokenize in each iteration of file
 
 # TOKENIZATION
-0. Define again behaviours and stuff
+..........
+add positions to edge/nGramz
+0. Define again behaviours , improve it
 0. fix standard tokenization .2 and a- etc cases
 1. impl nGRAM tok
 
@@ -15,26 +20,38 @@
 # SEARCH / SCORING
 ........
 1. Build a module that allows the following:
-- load index into memory
+#TODO finish OR, NOT generic search
+#TODO Improve design ooP of stuff
+#TODO PYthon inheritance Generics DUCKTyping etc..
 - apply Boolean search (AND, OR, and NOT)
-- apply phrase search
 - apply proximity search
 2. Run queries and check results
 3. tf/idf weightning
+4. Query optimization
 
+# QUERY PROCESSOR:
+.......
+1. Impl from some library
+
+# MICROSERVICES
+.......
+1. Find tutorial on this
+2. Start...
 
 # THEORY:
 .......
 1. Elasticsearch theory behind relevance scoring
 https://www.elastic.co/guide/en/elasticsearch/guide/current/scoring-theory.html
-2.
 
 
 # WRITE ON:
 ........
 1. Inverted index
 2. Retrieval models
+    - applying boolean search (via stanford book)
 Documents data >> modified tokens >> indexer builds the inverted index
+3. BooleanSearch
+4. Phrase search
 
 
 #TODO LAST:
