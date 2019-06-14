@@ -10,8 +10,9 @@ class Tokenizer(ABC):
     BASIC_PUNCTS = [':', ';', '?', '!', '/', '?', '(', ')', '...']
     MEANINGFUL_PUNCTS = ["'", "_", ".", ","]
     GENERAL_TYPOGRPHY = ['&', '*', '^', '=', '#', ':', '~', '@']
+    SYMBOLS = ["\n", "\t", "\r"]
     WORD_DIVIDERS = [" ", "-", "$"] + GENERAL_TYPOGRPHY
-    PUNCT_MARKS = BASIC_PUNCTS + MEANINGFUL_PUNCTS + WORD_DIVIDERS
+    PUNCT_MARKS = BASIC_PUNCTS + MEANINGFUL_PUNCTS + WORD_DIVIDERS + SYMBOLS
     # ------------------
     # REGEX:
     REGEX_NOT_WORD, REGEX_NOT_DIGIT, REGEX_NOT_WHITESPACE = "[^a-zA-Z]", "[^0-9]", "\S"  # [^ indicates NOT
@@ -26,24 +27,26 @@ class Tokenizer(ABC):
     @abstractmethod
     def tokenize(self, s: str, stops: set=None) -> list:
 
-        # General tokenizing algorithm,
-        # iterates on given string, splits on given word dividers returns tokens as list
+        # General tokenizing algorithm, iterates on given string,
+        # Splits on given word dividers returns tokens as list of tuples (token, position)
 
         if stops is None:
             stops = set()
 
         s = s.strip()
-        tokens, chars = list(), list()
+        tokens, chars, pos = list(), list(), 1
 
         for i in range(len(s)):
             if s[i] in self._word_divider:
                 if chars:
                     token, chars = "".join(chars), []
-                    if token not in stops: tokens.append(token)
+                    if token not in stops:
+                        tokens.append((token, pos))
+                    pos += 1
             elif s[i] in self.PUNCT_MARKS:
                 if s[i] in self._meaningful_puncts and i != len(s) - 1 and (s[i + 1].isalpha() or s[i + 1].isnumeric()):
                     chars.append(s[i])
             else: chars.append(s[i])
 
-        if chars: tokens.append("".join(chars))
+        if chars: tokens.append(("".join(chars), pos))
         return tokens

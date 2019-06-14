@@ -14,8 +14,7 @@ class TestTokenize(unittest.TestCase):
         tokenizer = StandardTokenizer()
         str1 = " i'm A simp le string. . string  "
         tokens = tokenizer.tokenize(str1)
-        self.assertEqual(6, len(tokens))
-        self.assertListEqual(["i'm", 'a', 'simp', 'le', 'string', 'string'], tokens)
+        self.assertListEqual([("i'm", 1), ('a', 2), ('simp', 3), ('le', 4), ('string', 5), ('string', 6)], tokens)
 
     @unittest.skip
     def test_standard_tokenizer_edge_cases(self):
@@ -40,8 +39,8 @@ class TestTokenize(unittest.TestCase):
         rnd1, rnd2 = random.choice(tokenizer.PUNCT_MARKS), random.choice(tokenizer.PUNCT_MARKS)
         str1 = "don$t (you) ever_5speak" + rnd1 + "^to' him! you-bad-boy" + rnd2
         tokens = tokenizer.tokenize(str1)
-        self.assertEqual(9, len(tokens))  # typography should split words
-        self.assertListEqual(['don', 't', 'you', 'ever_5speak', 'to', 'him', 'you', 'bad', 'boy'], tokens)
+        self.assertListEqual([('don', 1), ('t', 2), ('you', 3), ('ever_5speak', 4), ('to', 5),
+                              ('him', 6), ('you', 7), ('bad', 8), ('boy', 9)], tokens)
         self.assertTrue(all(punct not in tokens for punct in Tokenizer.PUNCT_MARKS))
 
     def test_keyword_tokenizer(self):
@@ -49,15 +48,13 @@ class TestTokenize(unittest.TestCase):
         tokenizer = KeywordTokenizer()
         str1 = "Kfar Saba city"
         tokens = tokenizer.tokenize(str1)
-        self.assertEqual(1, len(tokens))
-        self.assertEqual(str1.lower(), tokens[0])
+        self.assertEqual([("Kfar Saba city", 1)], tokens)
 
     def test_edge_ngram_tokenizer_default_params(self):
 
         tokenizer = NGramTokenizer()
         str1 = "Quick Fox"
         tokens = tokenizer.tokenize(str1, edges=True)
-        self.assertEqual(2, len(tokens))
         self.assertListEqual(['Q', 'Qu'], tokens)
 
     def test_edge_ngram_tokenizer_with_params(self):
@@ -66,7 +63,6 @@ class TestTokenize(unittest.TestCase):
         str1 = "Quick2Brown$Fox"
         # split on digit && symbol
         tokens = tokenizer.tokenize(str1, min_gram=3, max_gram=7, tok_chars=["letter"], edges=True)
-        self.assertEqual(7, len(tokens))
         self.assertListEqual(['Qui', 'Quic', 'Quick', 'Bro', 'Brow', 'Brown', 'Fox'], tokens)
 
     def test_edge_ngram_tokenizer_invalid(self):
@@ -81,7 +77,6 @@ class TestTokenize(unittest.TestCase):
         tokenizer = UAXEmailTokenizer()
         str1 = "Email me at john.smith@global-international.com"
         tokens = tokenizer.tokenize(str1)
-        self.assertEqual(4, len(tokens))
         self.assertListEqual(['email', 'me', 'at', 'john.smith@global-international.com'], tokens)
 
     def test_uax_url_email_tokenizer_invalid(self):
@@ -90,7 +85,6 @@ class TestTokenize(unittest.TestCase):
         tokenizer = UAXEmailTokenizer()
         str1 = "Email me at john.smith.global-international.com"
         tokens = tokenizer.tokenize(str1)
-        self.assertEqual(5, len(tokens))
         self.assertListEqual(['email', 'me', 'at', 'john.smith.global', 'international.com'], tokens)
 
     def test_stopwords_tokenizer(self):
@@ -99,7 +93,6 @@ class TestTokenize(unittest.TestCase):
         tokenizer = StopwordsTokenizer()
         str1 = "The 2 QUICK Brown-Foxes jumped over the lazy dog's bone."
         tokens = tokenizer.tokenize(str1)
-        self.assertEqual(7, len(tokens))
         self.assertListEqual(['2', 'QUICK', 'Brown-Foxes', 'jumped', 'lazy', "dog's", 'bone.'], tokens)
 
     def test_stopwords_tokenizer_from_file(self):
@@ -108,7 +101,6 @@ class TestTokenize(unittest.TestCase):
         str1 = "im awake or asleep a"
         path = os.path.join(os.path.dirname(__file__), "files\\tokenize\stops.txt")
         tokens = tokenizer.tokenize(str1, sw_file=path, stops=None, rmv_trail=False)
-        self.assertEqual(4, len(tokens))
         self.assertListEqual(['awake', 'or', 'asleep', 'a'], tokens)
 
     def test_stopwords_invalidity(self):
