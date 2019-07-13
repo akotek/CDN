@@ -14,7 +14,7 @@ class TestIndexer(unittest.TestCase):
         index = indexer.build(fp + "docs")
         with open(fp + "positional\\result", 'w') as w:
             for term_name, term in sorted(index.items()):
-                w.write("{}, {}:\n".format(term_name, term.tf))
+                w.write("{}, {}:\n".format(term_name, term.df))
                 for pst in term.pst_list:
                     w.write("{}\n".format(pst))
                 w.write("\n")

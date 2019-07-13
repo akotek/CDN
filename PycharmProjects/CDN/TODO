@@ -1,13 +1,15 @@
-#TODO:
-
 #TODO DO SPECS BEFORE EACH IMPL!!
 
 # INDEXER:
 ..........
+
+THINK ON NEW DESIGN...
+
 2. Test on trec file (edit it)
 2. Memory with writing to disk...
 3. Compression?
 4. LATER: improve to tokenize in each iteration of file
+5. Dynamic indexing..
 
 # TOKENIZATION
 ..........
@@ -19,15 +21,18 @@ add positions to edge/nGramz
 
 # SEARCH / SCORING
 ........
-1. Build a module that allows the following:
-#TODO finish OR, NOT generic search
-#TODO Improve design ooP of stuff
-#TODO PYthon inheritance Generics DUCKTyping etc..
-- apply Boolean search (AND, OR, and NOT)
-- apply proximity search
+#TODO improve boolean search and boolean modeling.. lousy!
+TF_IDF indexing!
 2. Run queries and check results
-3. tf/idf weightning
-4. Query optimization
+4. Query processor + optimization
+
+# SPELLING CORRECTION
+...........
+1.
+
+# CONCURRENCY :
+-------------
+1. impl mapReduce for indexing
 
 # QUERY PROCESSOR:
 .......

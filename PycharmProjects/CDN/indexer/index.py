@@ -10,7 +10,7 @@ class Posting:
     def __init__(self, id: int, pos_list: list = None):
         self.id = id
         self.pos_list = [] if not pos_list else pos_list
-        self.tf = 0 if not pos_list else len(pos_list)
+        self.tf = 0 if not pos_list else len(pos_list)  # raw count of term frequencies
 
     def __repr__(self):
         return "{},{}: [{}]".format(self.id, self.tf, ','.join(map(str, self.pos_list)))
@@ -26,10 +26,9 @@ class Term:
 
     def __init__(self, pst_list: list = None):
         self.pst_list = pst_list
-        self.df = 0 if not pst_list else sum(p.tf for p in pst_list)
+        self.df = 0 if not pst_list else len(pst_list)
 
     def add_post(self, id, pos):
-
         # Adds post to posts list,
         # if exists: increments it df
 
@@ -37,9 +36,10 @@ class Term:
         if not post:
             post = Posting(id, [pos])
             self.pst_list.append(Posting(id, [pos]))
+            self.df += 1
 
         post.pos_list.append(pos)
-        self.df, post.tf = self.df + 1, post.tf + 1
+        post.tf += 1
 
 
 class Index:
@@ -65,4 +65,5 @@ class Index:
                         index[tok] = Term([Posting(n, [pos])])
                     else:
                         index.get(tok).add_post(n, pos)
+
         return index
