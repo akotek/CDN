@@ -5,7 +5,7 @@ from preprocessing.tokenize.stand import StandardTokenizer
 
 class UAXEmailTokenizer(StandardTokenizer):
 
-    def tokenize(self, s: str, stops: set=None, stops_file: str=None) -> list:
+    def tokenize(self, s: str, stops: set = None, stops_file: str = None) -> list:
         # The uax_url_email tokenizer is like the stand.py tokenizer except that
         # it recognises URLs and email addresses as single tokens.
 
@@ -18,5 +18,5 @@ class UAXEmailTokenizer(StandardTokenizer):
         return super().tokenize(s)
 
     def _get_dividers(self):
-        return list(filter(lambda s: s not in ['@', '-', '.'], self.WORD_DIVIDERS)),\
+        return list(filter(lambda s: s not in ['@', '-', '.'], self.WORD_DIVIDERS)), \
                self.MEANINGFUL_PUNCTS + ['@', '-']

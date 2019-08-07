@@ -4,7 +4,6 @@ from indexer.index import Index, Posting
 from preprocessing.tokenize.stand import StandardTokenizer
 from search.model.boolean import BooleanSearch, PhraseSearch
 from search.query.query import BoolQuery, PhraseQuery
-from search.query.processor import QueryProcessor
 
 
 class TestBooleanSearch(unittest.TestCase):
